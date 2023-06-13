@@ -10,12 +10,15 @@ class AviaSoulsTest {
     AviaSouls aviaSouls = new AviaSouls();
     TicketTimeComparator timeComparator = new TicketTimeComparator();
 
-    Ticket ticket1 = new Ticket("Москва", "Минск", 13_000, 13_00, 14_00);
-    Ticket ticket2 = new Ticket("Москва", "Минск", 12_000, 14_00, 15_00);
-    Ticket ticket3 = new Ticket("Москва", "Минск", 14_000, 3_00, 4_00);
-    Ticket ticket4 = new Ticket("Москва", "Минск", 9_000, 8_00, 10_00);
-    Ticket ticket5 = new Ticket("Москва", "Минск", 3_000, 11_00, 15_00);
-    Ticket ticket6 = new Ticket("Москва", "Минск", 17_000, 12_00, 14_30);
+
+
+    Ticket ticket1 = new Ticket("Минск", "Москва", 63_000, 13_00, 20_00);
+    Ticket ticket2 = new Ticket("Минск", "Москва", 52_000, 14_00, 24_00);
+    Ticket ticket3 = new Ticket("Минск", "Москва", 82_000, 3_00, 19_00);
+    Ticket ticket4 = new Ticket("Минск", "Москва", 159_000, 4_00, 23_00);
+    Ticket ticket5 = new Ticket("Минск", "Москва", 63_000, 16_00, 23_00);
+    Ticket ticket6 = new Ticket("Минск", "Астана", 37_000, 12_00, 19_30);
+
 
     @Test
     void compareToIfLess() {
@@ -64,7 +67,7 @@ class AviaSoulsTest {
         aviaSouls.add(ticket6);
 
         Ticket[] expected = {ticket2, ticket1, ticket5, ticket3, ticket4};
-        Ticket[] actual = aviaSouls.search("Saint-Petersburg", "Toronto");
+        Ticket[] actual = aviaSouls.search("Минск", "Москва");
 
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -80,7 +83,7 @@ class AviaSoulsTest {
         aviaSouls.add(ticket6);
 
         Ticket[] expected = {ticket6};
-        Ticket[] actual = aviaSouls.search("Moscow", "Paris");
+        Ticket[] actual = aviaSouls.search("Минск", "Астана");
 
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -96,7 +99,7 @@ class AviaSoulsTest {
         aviaSouls.add(ticket6);
 
         Ticket[] expected = {};
-        Ticket[] actual = aviaSouls.search("Moscow", "Milan");
+        Ticket[] actual = aviaSouls.search("Минск", "Владимир");
 
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -148,7 +151,7 @@ class AviaSoulsTest {
         aviaSouls.add(ticket6);
 
         Ticket[] expected = {ticket1, ticket5, ticket2, ticket3, ticket4};
-        Ticket[] actual = aviaSouls.searchAndSortBy("Saint-Petersburg", "Toronto", timeComparator);
+        Ticket[] actual = aviaSouls.searchAndSortBy("Минск", "Москва", timeComparator);
 
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -164,7 +167,7 @@ class AviaSoulsTest {
         aviaSouls.add(ticket6);
 
         Ticket[] expected = {ticket6};
-        Ticket[] actual = aviaSouls.searchAndSortBy("Moscow", "Paris", timeComparator);
+        Ticket[] actual = aviaSouls.searchAndSortBy("Минск", "Астана", timeComparator);
 
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -180,7 +183,7 @@ class AviaSoulsTest {
         aviaSouls.add(ticket6);
 
         Ticket[] expected = {};
-        Ticket[] actual = aviaSouls.searchAndSortBy("Moscow", "Milan", timeComparator);
+        Ticket[] actual = aviaSouls.searchAndSortBy("Минск", "Париж", timeComparator);
 
         Assertions.assertArrayEquals(expected, actual);
     }
